@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Romantic Memories</title>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#000;color:#fff;font-family:Arial}
+#load{position:fixed;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#000;z-index:9}
+.heart{font-size:70px;color:#ff4fd8;animation:p 1s infinite}
+.bar{width:240px;height:8px;background:#222;border-radius:9px;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,#ff4fd8,#8a2be2)}
+@keyframes p{50%{transform:scale(1.2)}}
+#main{display:none;height:100%;position:relative}
+.word{position:absolute;opacity:.15;color:#ff8cff;animation:f 18s linear infinite}
+@keyframes f{from{transform:translateY(100vh)}to{transform:translateY(-120vh)}}
+.card{position:absolute;width:170px;border-radius:25px;overflow:hidden;backdrop-filter:blur(10px);box-shadow:0 0 25px #ff4fd8}
+.card img{width:100%;display:block}
+.timeline{position:absolute;left:20px;bottom:20px;background:rgba(255,255,255,.08);padding:14px;border-radius:20px}
+audio{position:absolute;top:15px;right:15px}
+</style></head><body>
+<div id="load"><div class="heart">❤</div><h2>LOADING MEMORIES</h2><div class="bar"><div class="fill" id="f"></div></div></div>
+<div id="main"><audio controls loop><source src=""></audio><div class="timeline"><b>Our Memory Timeline</b><br>First Meet ❤️<br>First Photo 📸<br>Forever ♾️</div></div>
+<script>
+let p=0,i=setInterval(()=>{p+=2;f.style.width=p+"%";if(p>=100){clearInterval(i);load.style.display="none";main.style.display="block";init();}},40);
+function init(){
+const phrases=["stay with me","forever","only you","you mean everything","my favorite person","i miss you","always with you"];
+for(let j=0;j<180;j++){let s=document.createElement('div');s.className='word';s.textContent=phrases[j%phrases.length];s.style.left=Math.random()*100+'vw';s.style.animationDuration=10+Math.random()*20+'s';s.style.fontSize=(10+Math.random()*18)+'px';document.body.appendChild(s);}
+for(let k=0;k<8;k++){let c=document.createElement('div');c.className='card';c.style.left=Math.random()*80+'vw';c.style.top=Math.random()*70+'vh';c.innerHTML='<img src="https://picsum.photos/300/400?random='+k+'">';main.appendChild(c);}
+document.onmousemove=e=>{document.querySelectorAll('.card').forEach((c,n)=>{c.style.transform=`translate(${(e.clientX-window.innerWidth/2)*(0.005+n*0.001)}px,${(e.clientY-window.innerHeight/2)*(0.005+n*0.001)}px)`})}
+}
+</script></body></html>
